@@ -9,8 +9,11 @@ export const FormContact = () => {
     })
 
     const submit = (formData) => {
+
         console.log(formData)
-        reset()
+        reset() 
+        alert(`Message sent successfully`)
+        
     }
 
     return(
