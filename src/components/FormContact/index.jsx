@@ -1,18 +1,31 @@
 import { useForm } from "react-hook-form"
 import  {  zodResolver  } from "@hookform/resolvers/zod"
 import { ShemaValidity } from "../SchemaValidity"
+import { api } from "../../service/index"
 
 export const FormContact = () => {
+
 
     const { register, handleSubmit, formState: {errors}, reset } = useForm({
         resolver: zodResolver(ShemaValidity)
     })
 
-    const submit = (formData) => {
+    const getData = async (formData) => {
+        
+        try {
+            
+            await api.post("/emails", formData)
+            alert(`Message sent successfully`)
+            
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
 
-        console.log(formData)
+    const submit = (formData) => {
+        getData(formData)
         reset() 
-        alert(`Message sent successfully`)
         
     }
 
@@ -36,5 +49,6 @@ export const FormContact = () => {
 
             <button type="submit">To enter</button>
         </form>
+
     )
 }
